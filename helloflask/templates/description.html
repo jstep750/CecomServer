@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+</div>
+<div class="container">
+    <a href="{{ url_for('description') }}"><h1 style="color:white">About Cecom</h1></a>
+    <h2 style="color:lightskyblue; align:left">&nbsp- Members</h2>
+    <br>
+  <div class="row">
+    <div class="col-md-8">
+      {% for user in users %}
+      <article>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <a class="h1" href="#" style="color:white">{{ user.username }}</a>
+            <p class="text-justify" style="color:white">{{ user.email }}</p>
+          </div>
+          <div class="col-md-2 d-flex flex-column">
+            <img class="rounded-circle mx-auto" src="#" data-src="holder.js/64x64" width="64px" height="64px">
+            <p class="text-muted text-center">id: {{ user.id }}</p>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

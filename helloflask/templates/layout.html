@@ -24,29 +24,40 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
     {% block stylesheet %}{% endblock %}
+    <style>
+      body{ background-image: url(static/image.jpg); background-size:cover}
+      .btn{ background-image: url(static/name.png)}
+    </style>
   </head>
 
   <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Flask 블로그</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Cecom Server</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+              <a class="nav-link" href="{{ url_for('description') }}">Description</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+              <a class="nav-link" href="{{ url_for('about') }}">2019</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('about1') }}">2020</a>
             </li>
           </ul>
 
           <!-- Navbar right side -->
           <div class="navbar-nav mt-mb-0">
-            <a class="nav-item nav-link" href="{#{ url_for('login') }#}">Login</a>
-            <a class="nav-item nav-link" href="{#{ url_for('registration') }#}">Register</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Register</a>
+            </li>
           </div>
         </div>
       </nav>

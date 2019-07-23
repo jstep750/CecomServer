@@ -1,12 +1,12 @@
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request, session, abort, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = 'this is secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site1.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -23,24 +23,20 @@ class User(db.Model):
 
     posts = db.relationship('Post', backref='author', lazy=True)
 
+    def __init__(self, username, email, password, **kwargs):
+        self.username = username
+        self.email = email
 
-def __init__(self, username, email, password, **kwargs):
-    self.username = username
-    self.email = email
+        self.set_password(password)
 
-    self.set_password(password)
+    def __repr__(self):
+        return f"<User('{self.id}', '{self.username}', '{self.email}')>"
 
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
 
-def __repr__(self):
-    return f"<User('{self.id}', '{self.username}', '{self.email}')>"
-
-
-def set_password(self, password):
-    self.password = generate_password_hash(password)
-
-
-def check_password(self, password):
-    return check_password_hash(self.password, password)
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
 class Post(db.Model):
@@ -55,33 +51,34 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"<Post('{self.id}', '{self.title}')>"
-'''
-posts = [
-    {
-        'author': {
-            'username': 'test-user'
-        },
-        'title': '첫 번째 포스트',
-        'content': '첫 번째 포스트 내용입니다.',
-        'date_posted': datetime.strptime('2018-08-01', '%Y-%m-%d')
-    },
-    {
-        'author': {
-            'username': 'test-user'
-        },
-        'title': '두 번째 포스트',
-        'content': '두 번째 포스트 내용입니다.',
-        'date_posted': datetime.strptime('2018-08-03', '%Y-%m-%d')
-    },
-]
-'''
+
 @app.route('/')
-@app.route('/index')
-def index():
-    posts = Post.query.all()
-    return render_template('index.html', posts=posts)
+def home():
+    return render_template('home.html')
+
+
+@app.route('/description')
+def description():
+    users = User.query.all()
+    return render_template('description.html', users=users)
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title='About')
+    posts = Post.query.all()
+    return render_template('about.html', posts=posts, title='About')
+
+
+@app.route('/about1')
+def about1():
+    return render_template('about1.html', title='About1')
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.route('/register')
+def register():
+    return render_template('login.html')
