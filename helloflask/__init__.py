@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, url_for, render_template, request, redirect, session
-from flask_login import LoginManager, current_user, login_user, logout_user
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -83,7 +83,8 @@ def login():
 
         if user is not None and user.check_password(passw):
             session['logged_in'] = True
-            return render_template('home.html')
+            curr_user = user
+            return render_template('home.html', curr_user=curr_user)
         else:
             return render_template('login.html')
 
@@ -105,13 +106,25 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/description')
+@app.route('/description', methods=['GET','POST'])
 def description():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
         users = User.query.all()
+        if request.method == 'POST':
+            delete()
         return render_template('description.html', users=users, title='Description')
+
+
+def delete():
+    delete_user = User.query.filter_by(username=request.form['delete_username']).first()
+    if delete_user is not None and delete_user.check_password(request.form['password']):
+        db.session.delete(delete_user)
+        db.session.commit()
+        if request.form['delete_username'] == session['name']:
+            logout()
+        return redirect(url_for('description'))
 
 
 @app.route('/about')

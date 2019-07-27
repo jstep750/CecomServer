@@ -3,11 +3,10 @@
 {% block login %}
 <div class="container">
     <form action = "/login" method = "post">
-        <h3 style="color:white; float:right">Id: <input type="text" name="username" placeholder="username"></h3>
+        <p style="color:white; float:right; font-size:16pt;">Id: <input type="text" name="username" placeholder="username" ></p>
         <br><br><br>
-        <h3 style="color:white; float:right">Password: <input type="text" name="password" placeholder="password"></h3>
-        <br>
-        <input type="submit" value="Log in" style="float:middle">
+        <p style="color:white; float:right; font-size:16pt;">Password: <input type="text" name="password" placeholder="password"></p>
+        <input type="submit" value="Login" size="50px" style="position:relative; left: 1150px; height:40px; width:80px; font-size:16pt;">
     </form>
 </div>
 {% endblock %}

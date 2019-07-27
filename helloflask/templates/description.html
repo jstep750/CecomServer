@@ -2,13 +2,11 @@
 
 {% block content %}
 
-</div>
-<div class="container">
-    <a href="{{ url_for('description') }}"><h1 style="color:white">Hello, Cecom!</h1></a>
-    <br><br>
-    <h2 style="color:lightskyblue; float: left">Members</h2>
+<ul class="container">
+    <h1 style="color:white">About Cecom</h1>
     <br>
-  <div class="row">
+    <h2 style="color:lightskyblue; position:relative; right:10px;">- Members</h2>
+  <div class="row" style="position:relative; left:40px;">
     <div class="col-md-8">
       {% for user in users %}
       <article>
@@ -26,7 +24,16 @@
       </article>
       {% endfor %}
     </div>
+      <aside class="col-md" style="position:relative; left:50px">
+        <form action = "/description" method = "post">
+          <p style="color:white; float:right;">Id: <input type="text" name="delete_username" placeholder="delete_username" ></p>
+          <br><br>
+          <p style="color:white; float:right;">Password: <input type="text" name="password" placeholder="password"></p>
+          <br><br>
+          <input type="submit" value="Delete" size="50px" style="position:relative; right:5pt; height:35px; width:80px; font-size:14pt; float:right;">
+        </form>
+      </aside>
   </div>
-</div>
+</ul>
 
 {% endblock %}

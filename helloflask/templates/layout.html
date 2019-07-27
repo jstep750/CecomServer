@@ -27,13 +27,14 @@
     <style>
       body{ background-image: url(static/image.jpg); background-size:cover}
       .btn{ background-image: url(static/name.png)}
+      .nav-item{ font-size:13.5pt }
     </style>
   </head>
 
   <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Cecom Server</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}" style="font-size:16pt">Cecom Server</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +43,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('description') }}">Description</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('index') }}">Index</a>
             </li>
             <li class="nav-item">
@@ -77,9 +78,9 @@
 
     <main role="main">
         <br><br><br><br>
-
     <!-- Main content block -->
     {% block content %}{% endblock %}
+
     </main>
 
     <!-- Bootstrap core JavaScript

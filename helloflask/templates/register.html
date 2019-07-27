@@ -10,14 +10,15 @@
     {% else %}
 <div class="container">
     <form action = "/regi" method = "post">
-        <h2 style="color:white; float:right">Id: <input type="text" name="username" placeholder="username"></h2>
+        <p style="color:white; float:right; font-size:16pt;">Id: <input type="text" name="username" placeholder="username"></p>
         <br><br><br>
-        <h2 style="color:white; float:right">Password: <input type="text" name="email" placeholder="email"></h2>
+        <p style="color:white; float:right; font-size:16pt;">Email: <input type="text" name="email" placeholder="email"></p>
         <br><br><br>
-        <h2 style="color:white; float:right">Password: <input type="text" name="password" placeholder="password"></h2>
-        <input type="submit" value="Register">
+        <p style="color:white; float:right; font-size:16pt;">Password: <input type="text" name="password" placeholder="password"></p>
+        <input type="submit" value="Register" style="position:relative; left: 1150px;height:40px; width:90px; font-size:15pt;">
     </form>
 </div>
     {% endif %}
 {% endblock %}
 
+{% block register %}{% endblock %}
