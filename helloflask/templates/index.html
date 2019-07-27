@@ -3,15 +3,15 @@
 {% block content %}
 <div class="container">
     <a href="{{ url_for('index') }}"><h1 style="color:white">Cecom 활동</h1></a>
+  <br><br><br>
   <div class="row">
-    <div class="col-md-9">
-
-      <h2 style="background color: black"></h2>
-        <a class="list-group-item" href="{{ url_for('description') }}">Members</a>
-        <a class="list-group-item" href="#" style="color:orange">First Semester</a>
-        <a class="list-group-item" href="#" style="color:red">Summer Vacation</a>
-        <a class="list-group-item" href="#" style="color:green">Second Semester</a>
-        <a class="list-group-item" href="#" style="color:purple">Winter Vacation</a>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/first.png" height="50" alt="First Semester"></a>
+    <br>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/summer.png" height="50" alt="Summer Vacations"></a>
+    <br>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/second.png" height="50" alt="Second Semester"></a>
+    <br>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/winter.png" height="50" alt="Winter Vacations"></a>
   </div>
 </div>
 

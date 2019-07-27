@@ -39,8 +39,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('description') }}">Description</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('index') }}">Index</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('about') }}">2019</a>
@@ -52,12 +55,21 @@
 
           <!-- Navbar right side -->
           <div class="navbar-nav mt-mb-0">
+            {% if session['logged_in'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('description') }}" style="color:lightskyblue">{{session['name']}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('login') }}">Register</a>
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
             </li>
+            {% endif %}
           </div>
         </div>
       </nav>

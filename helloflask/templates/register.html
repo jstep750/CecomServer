@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h1><br></h1>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/name.png" height="500" alt="CECOM"></a>
+    {% if session['logged_in'] %}
+    <h1 style="color:white; float:right">hi, you're logged in!</h1>
+</div>
+    {% else %}
+<div class="container">
+    <form action = "/regi" method = "post">
+        <h2 style="color:white; float:right">Id: <input type="text" name="username" placeholder="username"></h2>
+        <br><br><br>
+        <h2 style="color:white; float:right">Password: <input type="text" name="email" placeholder="email"></h2>
+        <br><br><br>
+        <h2 style="color:white; float:right">Password: <input type="text" name="password" placeholder="password"></h2>
+        <input type="submit" value="Register">
+    </form>
+</div>
+    {% endif %}
+{% endblock %}
+

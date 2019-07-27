@@ -1,5 +1,6 @@
 from datetime import datetime
-from flask import Flask, render_template, redirect, request, session, abort, url_for
+from flask import Flask, url_for, render_template, request, redirect, session
+from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -10,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+login = LoginManager(app)
 
 
 class User(db.Model):
@@ -30,7 +32,7 @@ class User(db.Model):
         self.set_password(password)
 
     def __repr__(self):
-        return f"<User('{self.id}', '{self.username}', '{self.email}')>"
+        return f"<User('{self.id}', '{self.username}', '{self.email})>"
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -52,33 +54,79 @@ class Post(db.Model):
     def __repr__(self):
         return f"<Post('{self.id}', '{self.title}')>"
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        name = request.form['username']
+        session['name'] = request.form['username']
+        passw = request.form['password']
+
+        user = User.query.filter_by(username=name).first()
+
+        if user is not None and user.check_password(passw):
+            session['logged_in'] = True
+            return render_template('home.html')
+        else:
+            return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session['logged_in'] = False
+    session.pop('username',None)
+    return redirect(url_for('login'))
+
+
+@app.route('/regi', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        new_user = User(username=request.form['username'], email=request.form['email'], password=request.form['password'] )
+        db.session.add(new_user)
+        db.session.commit()
+        return render_template('login.html')
+    return render_template('register.html')
+
+
 @app.route('/description')
 def description():
-    users = User.query.all()
-    return render_template('description.html', users=users)
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        users = User.query.all()
+        return render_template('description.html', users=users, title='Description')
 
 
 @app.route('/about')
 def about():
-    posts = Post.query.all()
-    return render_template('about.html', posts=posts, title='About')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        posts = Post.query.all()
+        return render_template('about.html', posts=posts, title='About')
 
 
 @app.route('/about1')
 def about1():
-    return render_template('about1.html', title='About1')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('about1.html', title='About1')
 
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-
-@app.route('/register')
-def register():
-    return render_template('login.html')
