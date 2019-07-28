@@ -3,19 +3,19 @@
 {% block content %}
 <div class="container">
     <h1><br></h1>
-    <a class="button" href="{{ url_for('description') }}"><img src="static/name.png" height="500" alt="CECOM"></a>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/name.png" height="450" alt="CECOM" style="position:relative; align:center;"></a>
     {% if session['logged_in'] %}
     <h1 style="color:white; float:right">hi, you're logged in!</h1>
 </div>
     {% else %}
 <div class="container">
     <form action = "/regi" method = "post">
-        <p style="color:white; float:right; font-size:16pt;">Id: <input type="text" name="username" placeholder="username"></p>
-        <br><br><br>
-        <p style="color:white; float:right; font-size:16pt;">Email: <input type="text" name="email" placeholder="email"></p>
-        <br><br><br>
-        <p style="color:white; float:right; font-size:16pt;">Password: <input type="text" name="password" placeholder="password"></p>
-        <input type="submit" value="Register" style="position:relative; left: 1150px;height:40px; width:90px; font-size:15pt;">
+        <div style="color:white; float:right; font-size:16pt; padding:5px;">Id: <input type="text" name="username" placeholder="username" ></div>
+        <br><br>
+        <div style="color:white; float:right; font-size:16pt; padding:5px;">Email: <input type="text" name="email" placeholder="email" ></div>
+        <br><br>
+        <div style="color:white; float:right; font-size:16pt; padding:5px;">Password: <input type="text" name="password" placeholder="password"></div>
+        <input type="submit" value="Register" size="50px" style="position:relative; left: 1150px; height:35px; width:90px; font-size:15pt;">
     </form>
 </div>
     {% endif %}

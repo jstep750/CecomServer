@@ -57,6 +57,7 @@ class Post(db.Model):
 
 @app.route('/')
 def home():
+    logout()
     return render_template('home.html')
 
 
@@ -112,9 +113,10 @@ def description():
         return render_template('login.html')
     else:
         users = User.query.all()
+        curr_user = User.query.filter_by(username=session['name']).first()
         if request.method == 'POST':
             delete()
-        return render_template('description.html', users=users, title='Description')
+        return render_template('description.html', users=users, curr_user=curr_user, title='Description')
 
 
 def delete():
@@ -124,6 +126,7 @@ def delete():
         db.session.commit()
         if request.form['delete_username'] == session['name']:
             logout()
+            return redirect(url_for('description'))
         return redirect(url_for('description'))
 
 

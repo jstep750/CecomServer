@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <h1><br></h1>
-    <a class="button" href="{{ url_for('description') }}"><img src="static/name.png" height="500" alt="CECOM"></a>
+    <a class="button" href="{{ url_for('description') }}"><img src="static/name.png" height="450" alt="CECOM" style="position:relative; align:center;"></a>
     {% if session['logged_in'] %}
     <h1 style="color:white; float:right">hi {{ curr_user.username }}, you're logged in!</h1>
     {% else %}
