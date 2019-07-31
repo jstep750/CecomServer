@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container" style="background-image:url(static/year_background.jpg);">
+    <a href="{{ url_for('about_v') }}"><h1 class="name" style="color:white">Cecom 활동</h1></a>
+  <div class="row" style="position:relative; left:40px;">
+    {% if request.path == url_for('about_1') %}
+      {% block about_1 %}{% endblock %}
+    {% elif request.path == url_for('about_2') %}
+      {% block about_2 %}{% endblock %}
+    {% elif request.path == url_for('about_v') %}
+      {% block about_v %}{% endblock %}
+    {% endif %}
+
+    {% block aside %}
+    <aside class="col-md-2.8" style="position:relative; left:50px" >
+      <ul>
+        <h2 style="color: white; padding-top:15px;">Index</h2>
+        <a class="list-group-item" href="{{ url_for('introduction') }}" style="color:red">Introductions</a>
+        <a class="list-group-item" href="{{ url_for('description') }}" style="color:orange">Members</a>
+        <a class="list-group-item" href="#" style="color:green">First Semester</a>
+        <a class="list-group-item" href="#" style="color:blue">Vacation</a>
+        <a class="list-group-item" href="#" style="color:purple">Second Semester</a>
+      </ul>
+    </aside>
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <a href="{{ url_for('index') }}"><h1 class="name" style="color:white">Projects</h1></a>
+  <img src="static/ppt.gif" height="600" alt="star background" style="position:relative; align:center; left:20px;">
+  <div class="row" style="position:absolute; top:700px; left:430px;">
+    <div class="col-xs-3" style="margin-right:180px">
+      <a class="button" href="{{ url_for('about_1') }}"><img src="static/first1.png" height="80" alt="First Semester" title="(＾• ω •＾)혜진"></a>
+    </div>
+    <div class="col-xs-3">
+      <a class="button" href="{{ url_for('about_v') }}"><img src="static/vacation.png" height="50" alt="Vacations" title="∪･ω･∪수현"></a>
+    </div>
+    <div class="col-xs-3" style="margin-left:180px">
+      <a class="button" href="{{ url_for('about_2') }}"><img src="static/second2.png" height="80" alt="Second Semester" title="(=^･ｪ･^=)은서"></a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
